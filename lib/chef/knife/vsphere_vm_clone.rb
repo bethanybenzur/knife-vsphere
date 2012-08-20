@@ -201,6 +201,8 @@ class Chef::Knife::VsphereVmClone < Chef::Knife::BaseVsphereCommand
 			fatal_exit("VM #{vmname} not found")
 			vm.PowerOnVM_Task.wait_for_completion
 			puts "Powered on virtual machine #{vmname}"
+      sleep 2 until vm.guest.ipAddress
+      config[:fqdn] = vm.guest.ipAddress
 		end
 
 		if get_config(:bootstrap)
