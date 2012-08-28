@@ -163,6 +163,7 @@ class Chef::Knife::VsphereVmClone < Chef::Knife::BaseVsphereCommand
     :short => "-j JSON_ATTRIBS",
     :long => "--json-attributes",
     :description => "A JSON string to be added to the first run of chef-client",
+    :proc => lambda { |o| JSON.parse(o) },
     :default => {}
 
 	def run
